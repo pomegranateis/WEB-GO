@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    <div>
+        <h2>Login</h2>
+        <form>
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username" required><br>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" required><br>
+            <input type="submit" id= "submit" value="Login">
+        </form>
+
+        <script>
+        const name = document.getElementById("name")
+        const Password = document.getElementById("password")
+        const submit = document.getElementById("submit")
+
+        submit.addEventListener('click', function(event) {
+          console.log("button clicked")
+          event.preventDefault();
+
+          const name_value = name.value
+          console.log (name.value)
+        
+          const password_value = Password.value
+          console.log (password_value)
+        })
+
+        const data = {
+          name : name_value,
+          Password : password_value
+        }
+
+        event.preventDefault();
+
+        fetch("http/127.0.0.1:8080/auth", {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8"
+          }
+        })
+          .then((response) => response.json())
+          .then((json) => console.log(json));
+
+        </script>
+    </div>
+</body>
+</html>
